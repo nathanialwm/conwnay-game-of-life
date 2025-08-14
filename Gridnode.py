@@ -1,4 +1,4 @@
-
+import random
 
 class Gridnode:
     """
@@ -9,17 +9,23 @@ class Gridnode:
     Must access the Grid
     """
 
-    def __init__(self, x, y, xpos, ypos):
-        self.alive = False
+    def __init__(self, x, y, xpos, ypos, spawn_rate):
+        self.alive = self.init_alive(spawn_rate)
         self.age = 0
         self.x = x
         self.y = y
         self.xpos = xpos
         self.ypos = ypos
         self.neighbors = []
-        self.color = "#d3d3d3" if self.alive else "#13191F"
+        self.color = "#b9e4a0" if self.alive else "#13191F"
         self.rect = None
-    
+        
+    def init_alive(self, spawn_rate) -> bool:
+        if random.random() * 100 >= spawn_rate:
+            return False
+        else:
+            return True
+        
     def get_neighbors(self):
         pass
 
