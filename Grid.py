@@ -1,8 +1,11 @@
-class Grid:
-    def __init__(self, x_size, y_size):
-        self.size = (x_size, y_size)
-        self.x_size = x_size
-        self.y_size = y_size
+from Gridnode import Gridnode
 
-        def draw(screen):
-            pass
+class Grid:
+    def __init__(self, size):
+        self.cell_size = 20
+        self.rows = int(size[1]/self.cell_size)
+        self.cols = int(size[0]/self.cell_size)
+        self.size = (self.rows, self.cols) # index size of grid
+
+        self.grid = [[Gridnode(x, y, x*self.cell_size, y*self.cell_size) for x in range(self.cols)] for y in range(self.rows)]
+

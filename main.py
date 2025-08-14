@@ -1,4 +1,5 @@
 import pygame
+from Grid import Grid
 
 # pygame setup
 pygame.init()
@@ -6,6 +7,8 @@ screen_size = (1280,720)
 screen = pygame.display.set_mode(screen_size)
 clock = pygame.time.Clock()
 running = True
+
+grid = Grid(screen_size)
 
 while running:
     # poll for events
@@ -15,10 +18,15 @@ while running:
             running = False
 
     # fill the screen with a color to wipe away anything from last frame
-    screen.fill("purple")
+    screen.fill("#13191F")
 
     # RENDER YOUR GAME HERE
-
+    
+    for row in grid.grid:  # Iterate over rows
+        for gridnode in row:  # Iterate over gridnode objects in each row
+            # The gridnode object already contains the rect and color
+            gridnode.rect = pygame.Rect(gridnode.xpos, gridnode.ypos, grid.cell_size, grid.cell_size)
+            pygame.draw.rect(screen, gridnode.color, gridnode.rect, 0)
     # flip() the display to put your work on screen
     pygame.display.flip()
 
